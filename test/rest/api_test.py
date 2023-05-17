@@ -12,19 +12,19 @@ DEFAULT_TIMEOUT = 2  # in secs
 @pytest.mark.api
 class TestApi(unittest.TestCase):
     def setUp(self):
-        print('=== === ===')
-        print('por aqui')
-        print('BASE_URL', BASE_URL)
         self.assertIsNotNone(BASE_URL, "URL no configurada")
         self.assertTrue(len(BASE_URL) > 8, "URL no configurada")
-        print('=== === ===')
 
-    def test_api_add(self):
-        self.assertEqual(11, 11)
-        
+    def test_api_add(self):        
         url = f"{BASE_URL}/calc/add/2/2"
         response = urlopen(url, timeout=DEFAULT_TIMEOUT)
-        print(response)
-        self.assertEqual(
-            response.status, http.client.OK, f"Error en la petición API a {url}"
-        )
+
+        self.assertEqual(response.status, http.client.OK)
+        self.assertEqual(response.read().decode('utf-8'), '4')
+
+    def test_api_substract(self):        
+        url = f"{BASE_URL}/calc/substract/20/12"
+        response = urlopen(url, timeout=DEFAULT_TIMEOUT)
+
+        self.assertEqual(response.status, http.client.OK)
+        self.assertEqual(response.read().decode('utf-8'), '8')
