@@ -1,5 +1,5 @@
 import math
-import app
+import app 
 
 class InvalidPermissions(Exception):
     pass
@@ -34,15 +34,21 @@ class Calculator:
 
     def sqrt(self, x):
         self.check_type(x)
+        self.check_positive_number(x)
         return math.sqrt(x)
 
     def log10(self, x):
         self.check_type(x)
+        self.check_positive_number(x)
         return math.log10(x)
 
     def check_type(self, x):
         if not isinstance(x, (int, float)):
             raise TypeError("Parameter must be number")
+        
+    def check_positive_number(self, x):
+        if x < 0:
+            raise TypeError("Parameter must be positive number")
         
     def check_types(self, x, y):
         if not isinstance(x, (int, float)) or not isinstance(y, (int, float)):
@@ -60,7 +66,7 @@ if __name__ == "__main__":  # pragma: no cover
     result = calc.multiply(4, 7)
     print('multiply', result)
 
-    result = calc.divide(10, 0)
+    result = calc.divide(10, 10)
     print('divide', result)
 
     result = calc.power(3, 3)
@@ -69,5 +75,5 @@ if __name__ == "__main__":  # pragma: no cover
     result = calc.sqrt(4)
     print('sqrt', result)
 
-    result = calc.log10(1000)
+    result = calc.log10(-1000)
     print('log10', result)

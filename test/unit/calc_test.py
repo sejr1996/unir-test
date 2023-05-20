@@ -101,16 +101,24 @@ class TestCalculate(unittest.TestCase):
         self.assertRaises(TypeError, self.calc.sqrt, "2")
         self.assertRaises(TypeError, self.calc.sqrt, None)
         self.assertRaises(TypeError, self.calc.sqrt, object())
+    
+    def test_sqrt_method_fails_with_an_parameter_negative(self):
+        self.assertRaises(TypeError, self.calc.sqrt, -4)
+        self.assertRaises(TypeError, self.calc.sqrt, -100)
 
     def test_log10_method_returns_correct_result(self):
         self.assertEqual(1, self.calc.log10(10))
         self.assertEqual(2, self.calc.log10(100))
         self.assertEqual(3, self.calc.log10(1000))
 
-    def test_sqrt_method_fails_with_nan_parameter(self):
+    def test_log10_method_fails_with_nan_parameter(self):
         self.assertRaises(TypeError, self.calc.log10, "100")
         self.assertRaises(TypeError, self.calc.log10, None)
         self.assertRaises(TypeError, self.calc.log10, object())
+
+    def test_log10_method_fails_with_an_parameter_negative(self):
+        self.assertRaises(TypeError, self.calc.log10, -10)
+        self.assertRaises(TypeError, self.calc.log10, -100)
 
 if __name__ == "__main__":  # pragma: no cover
     unittest.main()
